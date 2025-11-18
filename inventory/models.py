@@ -1,12 +1,31 @@
 from django.db import models
-from products.models import Product
-
+from products.models import *
+from django.db.models import Sum
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
-    unit = models.CharField(max_length=50)
-    cost_per_unit = models.FloatField()
+    unit = models.CharField(max_length=20)
+    cost_per_unit = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=True)
+
+    def entradas(self):
+        return (
+            self.inventorymovement_set
+                .filter(movement_type="entrada")
+                .aggregate(total=Sum("quantity"))["total"]
+            or 0
+        )
+
+    def salidas(self):
+        return (
+            self.inventorymovement_set
+                .filter(movement_type="salida")
+                .aggregate(total=Sum("quantity"))["total"]
+            or 0
+        )
+
+    def stock_actual(self):
+        return self.entradas() + self.salidas()
 
     def __str__(self):
         return self.name
@@ -29,3 +48,9 @@ class RecipeIngredient(models.Model):
 
     def __str__(self):
         return f"{self.ingredient} en {self.recipe}: {self.quantity}"
+
+class InventoryMovement(models.Model):
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    quantity = models.DecimalField(max_digits=10, decimal_places=2)
+    movement_type = models.CharField(max_length=20)  # entrada / salida / merma
+    timestamp = models.DateTimeField(auto_now_add=True)
