@@ -1,0 +1,10 @@
+        .main-content {
+          margin-left: 200px;
+          /* Ancho del sidebar */
+          padding: 20px;
+        }
+
+        .navbar-dark-soft {
+          background-color: #2c2f33 !important;
+          /* dark suave tipo Discord */
+        }

@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from inventory import views as inv_views
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', inv_views.index, name='index')
 ]
