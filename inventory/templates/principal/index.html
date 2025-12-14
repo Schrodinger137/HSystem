@@ -5,7 +5,7 @@
 
 {% block breadCrumb %}
 <li class="breadcrumb-item active" aria-current="page">
-        Inicio
+    Inicio
 </li>
 {% endblock %}
 
@@ -18,6 +18,7 @@
             <a href="{% url 'sales' %}" style="text-decoration: none;">
                 <div class="card bg-primary text-white h-100">
                     <div class="card-body">
+                        <i class="bi bi-cart-check fs-1 mb-3"></i>
                         <h5>Sistema de Ventas</h5>
                         <p class="mb-0">Accede al módulo de ventas.</p>
                     </div>
@@ -29,6 +30,7 @@
             <a href="{% url 'inventory' %}" style="text-decoration: none;">
                 <div class="card bg-success text-white h-100">
                     <div class="card-body">
+                        <i class="bi bi-box-seam fs-1 mb-3"></i>
                         <h5>Inventario</h5>
                         <p class="mb-0">Gestiona el stock en tiempo real.</p>
                     </div>
@@ -40,6 +42,7 @@
             <a href="{% url 'products' %}" style="text-decoration: none;">
                 <div class="card bg-warning text-dark h-100">
                     <div class="card-body">
+                        <i class="bi bi-tags fs-1 mb-3"></i>
                         <h5>Productos</h5>
                         <p class="mb-0">Administra los productos.</p>
                     </div>
@@ -51,6 +54,7 @@
             <a href="{% url 'finance' %}" style="text-decoration: none;">
                 <div class="card bg-danger text-white h-100">
                     <div class="card-body">
+                        <i class="bi bi-cash-coin fs-1 mb-3"></i>
                         <h5>Finanzas</h5>
                         <p class="mb-0">Visualiza informes.</p>
                     </div>
