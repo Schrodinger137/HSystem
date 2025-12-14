@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inventario{% endblock %}
+
+{% block breadCrumb %}
+<li class="breadcrumb-item">
+    <a href="{% url 'inventory' %}">Inventario</a>
+</li>
+<li class="breadcrumb-item active" aria-current="page">
+    Ingredientes
+</li>
+{% endblock %}
+
+{% block headerOptions %}
+<a href="{% url 'ingredientInventory' %}" class="btn btn-outline-primary">
+    <i class="bi bi-box-seam me-1"></i>
+    Ingredients
+</a>
+{% endblock %}
+
+{% block content %}
+
+<h4>RecipeInventory works</h4>
+
+{% endblock %}

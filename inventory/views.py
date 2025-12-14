@@ -9,3 +9,6 @@ def inventory(request):
 
 def ingredientInventory(request):
     return render(request, 'inventory/ingredientInventory.html')
+
+def recipeInventory(request):
+    return render(request, 'inventory/recipeInventory.html')
