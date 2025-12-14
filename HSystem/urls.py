@@ -17,7 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from inventory import views as inv_views
+from products import views as prod_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', inv_views.index, name='index')
+    path('', inv_views.index, name='index'),
+    path('products/', prod_views.products, name='products')
 ]

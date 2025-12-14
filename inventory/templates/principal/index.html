@@ -5,41 +5,167 @@
 
 {% block content %}
 
-<div class="container mt-4">
+<!-- TARJETAS SUPERIORES -->
+<div class="container-fluid">
     <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card text-white bg-primary">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Sistema de Ventas</h5>
-                    <p class="card-text">Accede al módulo de ventas.</p>
+                    <h5>Sistema de Ventas</h5>
+                    <p class="mb-0">Accede al módulo de ventas.</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-success">
+
+        <div class="col-md-3">
+            <div class="card bg-success text-white h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Inventario</h5>
-                    <p class="card-text">Gestiona el stock en tiempo real.</p>
+                    <h5>Inventario</h5>
+                    <p class="mb-0">Gestiona el stock en tiempo real.</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-warning">
+
+        <div class="col-md-3">
+            <div class="card bg-warning text-dark h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Productos</h5>
-                    <p class="card-text">Administra los productos que se venden.</p>
+                    <h5>Productos</h5>
+                    <p class="mb-0">Administra los productos.</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-danger">
+
+        <div class="col-md-3">
+            <div class="card bg-danger text-white h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Finanzas</h5>
-                    <p class="card-text">Visualiza informes y análisis.</p>
+                    <h5>Finanzas</h5>
+                    <p class="mb-0">Visualiza informes.</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- GRÁFICAS -->
+    <div class="row mt-5 g-4">
+
+        <div class="col-md-6">
+            <div class="card chart-card text-light">
+                <div class="card-body">
+                    <h5>Ventas por categoría</h5>
+                    <canvas id="chartVentas"></canvas>
+
+                    <div class="d-flex justify-content-end gap-2 mt-auto">
+                        <button class="btn btn-outline-light btn-sm">Ver informe</button>
+                        <button class="btn btn-outline-success btn-sm">Descargar informe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card chart-card text-light">
+                <div class="card-body">
+                    <h5>Stock de inventario</h5>
+                    <canvas id="chartInventario"></canvas>
+
+                    <div class="d-flex justify-content-end gap-2 mt-auto">
+                        <button class="btn btn-outline-light btn-sm">Ver informe</button>
+                        <button class="btn btn-outline-success btn-sm">Descargar informe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card chart-card text-light">
+                <div class="card-body">
+                    <h5>Ventas mensuales</h5>
+                    <canvas id="chartTiempo"></canvas>
+
+                    <div class="d-flex justify-content-end gap-2 mt-auto">
+                        <button class="btn btn-outline-light btn-sm">Ver informe</button>
+                        <button class="btn btn-outline-success btn-sm">Descargar informe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card chart-card text-light">
+                <div class="card-body">
+                    <h5>Distribución financiera</h5>
+                    <canvas id="chartFinanzas"></canvas>
+
+                    <div class="d-flex justify-content-end gap-2 mt-auto">
+                        <button class="btn btn-outline-light btn-sm">Ver informe</button>
+                        <button class="btn btn-outline-success btn-sm">Descargar informe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+
+<!-- GRÁFICAS (SOLO VISUAL) -->
+<script>
+const colors = {
+    blue: '#4f7cff',
+    green: '#2ecc71',
+    purple: '#9b59b6',
+    softBlue: '#6c8cff'
+};
+
+new Chart(chartVentas, {
+    type: 'pie',
+    data: {
+        labels: ['Electrónica', 'Ropa', 'Hogar', 'Otros'],
+        datasets: [{
+            data: [40,25,20,15],
+            backgroundColor: [colors.blue, colors.green, colors.purple, colors.softBlue]
+        }]
+    },
+    options: { plugins: { legend: { position: 'bottom' } } }
+});
+
+new Chart(chartInventario, {
+    type: 'bar',
+    data: {
+        labels: ['A','B','C','D'],
+        datasets: [{
+            data: [120,90,60,30],
+            backgroundColor: colors.blue
+        }]
+    },
+    options: { plugins: { legend: { display: false } } }
+});
+
+new Chart(chartTiempo, {
+    type: 'line',
+    data: {
+        labels: ['Ene','Feb','Mar','Abr','May','Jun'],
+        datasets: [{
+            data: [300,420,380,500,460,600],
+            borderColor: colors.green,
+            backgroundColor: 'rgba(46,204,113,.15)',
+            fill: true,
+            tension: .4
+        }]
+    },
+    options: { plugins: { legend: { display: false } } }
+});
+
+new Chart(chartFinanzas, {
+    type: 'doughnut',
+    data: {
+        labels: ['Ingresos','Gastos','Ahorro'],
+        datasets: [{
+            data: [55,30,15],
+            backgroundColor: [colors.green, colors.purple, colors.blue]
+        }]
+    },
+    options: { plugins: { legend: { position: 'bottom' } } }
+});
+</script>
 
 {% endblock %}
