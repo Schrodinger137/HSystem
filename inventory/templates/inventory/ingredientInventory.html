@@ -51,9 +51,8 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Unidades</th>
+                <th scope="col">Cantidad / Unidad</th>
                 <th scope="col">Costo / Unidad</th>
-                <th scope="col">Cantidad</th>
                 <th scope="col">Costo Total</th>
                 <th scope="col">Disponible</th>
                 <th scope="col">Acciones</th>
@@ -64,9 +63,8 @@
             <tr>
                 <th scope="row">{{ ingredient.id }}</th>
                 <td><a href="{% url 'ingredient' ingredient.id %}" class="text-light">{{ ingredient.name }}</a></td>
-                <td>{{ ingredient.unit }}</td>
+                <td>{{ ingredient.quantity }} {{ingredient.unit }}</td>
                 <td>${{ ingredient.cost_per_unit }}</td>
-                <td>{{ ingredient.quantity }}</td>
                 <td>${{ ingredient.total_cost }}</td>
                 <td>
                     <input class="form-check-input m-0" type="checkbox" {% if ingredient.available %}checked{% endif %}>

@@ -13,10 +13,16 @@ def index(request):
 
 def inventory(request):
     
-    ingredients = Ingredient.objects.all()
+    ingredients = Ingredient.objects.all()    
+    recent_ingredients = Ingredient.objects.order_by('-created_at')[:5]
+    total_ingredients = ingredients.count()
+    total_cost_ingredients = sum([ingredient.total_cost for ingredient in ingredients])
     
     context = {
-        'ingredients':ingredients
+        'ingredients':ingredients,
+        'recent_ingredients':recent_ingredients,
+        'total_cost_ingredients':total_cost_ingredients,
+        'total_ingredients':total_ingredients,
     }
 
     return render(request, 'inventory/inventory.html', context)
@@ -25,7 +31,7 @@ def ingredientInventory(request):
     ingredients = Ingredient.objects.all()
 
     context = {
-        'ingredients': ingredients
+        'ingredients': ingredients,
     }
 
     return render(request, 'inventory/ingredientInventory.html', context)

@@ -34,8 +34,8 @@
                     <hr>
                     <h6>Costo de la cantidad actual: ${{ingredient.total_cost}}</h6>
                 </div>
-                <div class="card-footer text-center">
-                    <button class="btn btn-outline-warning"
+                <div class="card-footer d-grid  text-center">
+                    <button class="btn btn-warning"
                         onclick="openEditIngredientModal({{ ingredient.id }}, '{{ ingredient.name|escapejs }}', '{{ ingredient.unit }}', '{{ ingredient.cost_per_unit }}', '{{ ingredient.quantity }}')">
                         Editar ingrediente
                     </button>

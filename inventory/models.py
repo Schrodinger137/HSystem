@@ -9,6 +9,9 @@ class Ingredient(models.Model):
     cost_per_unit = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     available = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)  # <- sin default
+    updated_at = models.DateTimeField(auto_now=True)
+
     
     def save(self, *args, **kwargs):
         # Regla de negocio central
