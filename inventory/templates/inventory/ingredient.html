@@ -35,10 +35,36 @@
                     <h6>Costo de la cantidad actual: ${{ingredient.total_cost}}</h6>
                 </div>
                 <div class="card-footer text-center">
-                    <button class="btn btn-warning"
+                    <button class="btn btn-outline-warning"
                         onclick="openEditIngredientModal({{ ingredient.id }}, '{{ ingredient.name|escapejs }}', '{{ ingredient.unit }}', '{{ ingredient.cost_per_unit }}', '{{ ingredient.quantity }}')">
                         Editar ingrediente
                     </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card bg-dark">
+                <div class="card-header">
+                    <h5>Recetas que usan {{ingredient.name}}</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-dark table-striped table-hover align-middle text-center">
+                        <thead class="text-uppercase small">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td><a href="#" class="text-light">Hamburguesa</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-center">
+
                 </div>
             </div>
         </div>

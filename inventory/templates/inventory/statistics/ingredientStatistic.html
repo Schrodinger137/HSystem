@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ventas{% endblock %}
+
+{% block breadCrumb %}
+<li class="breadcrumb-item">
+    <a href="{% url 'inventory' %}">Inventario</a>
+</li>
+<li class="breadcrumb-item">
+    <a href="{% url 'ingredientInventory' %}">Ingredientes</a>
+</li>
+<li class="breadcrumb-item active" aria-current="page">
+    Estadísticas
+</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h4>Ingredients Statistics works</h4>
+</div>
+
+{% endblock %}
