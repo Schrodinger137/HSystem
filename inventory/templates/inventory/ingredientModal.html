@@ -1,0 +1,62 @@
+<div class="modal fade" id="ingredientModal" tabindex="-1" aria-labelledby="ingredientModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-light">
+
+      <div class="modal-header border-secondary">
+        <h1 class="modal-title fs-5" id="ingredientModalLabel">
+          Nuevo ingrediente
+        </h1>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+
+      <form>
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control bg-dark text-light border-secondary"
+                   id="name" placeholder="Ej. Azúcar">
+          </div>
+
+          <div class="mb-3">
+            <label for="unit" class="form-label">Unidad</label>
+            <select id="unit" class="form-select bg-dark text-light border-secondary">
+              <option value="">Selecciona una unidad</option>
+              <option value="kg">Kilogramo</option>
+              <option value="g">Gramo</option>
+              <option value="l">Litro</option>
+              <option value="ml">Mililitro</option>
+              <option value="u">Unidad</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="cost" class="form-label">Costo por unidad</label>
+            <input type="number" step="0.01"
+                   class="form-control bg-dark text-light border-secondary"
+                   id="cost" placeholder="0.00">
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="available" checked>
+            <label class="form-check-label" for="available">
+              Disponible
+            </label>
+          </div>
+
+        </div>
+
+        <div class="modal-footer border-secondary">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary">
+            Guardar
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
