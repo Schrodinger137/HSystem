@@ -50,41 +50,25 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Unidades</th>
                 <th scope="col">Costo / Unidad</th>
+                <th scope="col">Cantidad</th>
                 <th scope="col">Costo Total</th>
                 <th scope="col">Disponible</th>
             </tr>
         </thead>
         <tbody>
+            {% for ingredient in ingredients %}
             <tr>
-                <th scope="row">1</th>
-                <td>Jitomate</td>
-                <td>3</td>
-                <td>$2.00</td>
-                <td>$6.00</td>
+                <th scope="row">{{ ingredient.id }}</th>
+                <td>{{ ingredient.name }}</td>
+                <td>{{ ingredient.unit }}</td>
+                <td>${{ ingredient.cost_per_unit }}</td>
+                <td>{{ ingredient.quantity }}</td>
+                <td>${{ ingredient.total_cost }}</td>
                 <td>
-                    <input class="form-check-input m-0" type="checkbox" checked>
+                    <input class="form-check-input m-0" type="checkbox" {% if ingredient.available %}checked{% endif %}>
                 </td>
             </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>Jitomate</td>
-                <td>3</td>
-                <td>$2.00</td>
-                <td>$6.00</td>
-                <td>
-                    <input class="form-check-input m-0" type="checkbox" checked>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>Jitomate</td>
-                <td>3</td>
-                <td>$2.00</td>
-                <td>$6.00</td>
-                <td>
-                    <input class="form-check-input m-0" type="checkbox" checked>
-                </td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>

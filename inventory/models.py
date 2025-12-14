@@ -6,8 +6,13 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=100)
     unit = models.CharField(max_length=20)
     cost_per_unit = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     available = models.BooleanField(default=True)
-
+    
+    @property
+    def total_cost(self):
+        return self.cost_per_unit * self.quantity
+    
     def entradas(self):
         return (
             self.inventorymovement_set
