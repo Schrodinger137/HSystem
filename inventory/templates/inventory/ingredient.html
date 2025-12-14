@@ -17,6 +17,8 @@
 
 {% block content %}
 
+{% include 'inventory/modals/updateIngredientModal.html' %}
+
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-4">
@@ -27,9 +29,16 @@
                 <div class="card-body">
                     <h6 class="card-title">En existencia: {{ingredient.quantity}} {{ingredient.unit}}</h6>
                     <hr>
-                    <h6>Costo por <a href="" class="text-light">{{ingredient.unit}}</a>: ${{ingredient.cost_per_unit}}</h6>
+                    <h6>Costo por <a href="" class="text-light">{{ingredient.unit}}</a>: ${{ingredient.cost_per_unit}}
+                    </h6>
                     <hr>
                     <h6>Costo de la cantidad actual: ${{ingredient.total_cost}}</h6>
+                </div>
+                <div class="card-footer text-center">
+                    <button class="btn btn-warning"
+                        onclick="openEditIngredientModal({{ ingredient.id }}, '{{ ingredient.name|escapejs }}', '{{ ingredient.unit }}', '{{ ingredient.cost_per_unit }}', '{{ ingredient.quantity }}')">
+                        Editar ingrediente
+                    </button>
                 </div>
             </div>
         </div>
