@@ -111,5 +111,15 @@ def ingredient_update(request, ingredient_id):
             "message": str(e)
         }, status=500)        
 
+def ingredient(request, ingredient_id):
+    
+    ingredient = get_object_or_404(Ingredient, id=ingredient_id)
+    
+    context={
+        'ingredient':ingredient
+    }
+    
+    return render(request, 'inventory/ingredient.html', context)
+
 def recipeInventory(request):
     return render(request, 'inventory/recipeInventory.html')

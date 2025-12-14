@@ -62,7 +62,7 @@
             {% for ingredient in ingredients %}
             <tr>
                 <th scope="row">{{ ingredient.id }}</th>
-                <td>{{ ingredient.name }}</td>
+                <td><a href="{% url 'ingredient' ingredient.id %}" class="text-light">{{ ingredient.name }}</a></td>
                 <td>{{ ingredient.unit }}</td>
                 <td>${{ ingredient.cost_per_unit }}</td>
                 <td>{{ ingredient.quantity }}</td>

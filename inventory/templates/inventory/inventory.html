@@ -44,7 +44,7 @@
                         {% for ingredient in ingredients %}
                         <tr>
                             <td>{{ ingredient.id }}</td>
-                            <td>{{ ingredient.name }}</td>
+                            <td><a href="{% url 'ingredient' ingredient.id %}" class="text-light">{{ ingredient.name }}</a></td>
                             <td>{{ ingredient.quantity }}</td>
                             <td>
                                 <input class="form-check-input m-0" type="checkbox" {% if ingredient.available %}checked{% endif %}>

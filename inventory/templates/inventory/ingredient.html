@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ventas{% endblock %}
+
+{% block breadCrumb %}
+<li class="breadcrumb-item">
+    <a href="{% url 'inventory' %}">Inventario</a>
+</li>
+<li class="breadcrumb-item">
+    <a href="{% url 'ingredientInventory' %}">Ingredientes</a>
+</li>
+<li class="breadcrumb-item active" aria-current="page">
+    {{ingredient.name}}
+</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card bg-dark">
+                <div class="card-header">
+                    <h5> <input class="form-check-input m-0" type="checkbox" {% if ingredient.available %}checked{% endif %}> {{ingredient.name}}</h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">En existencia: {{ingredient.quantity}} {{ingredient.unit}}</h6>
+                    <hr>
+                    <h6>Costo por <a href="" class="text-light">{{ingredient.unit}}</a>: ${{ingredient.cost_per_unit}}</h6>
+                    <hr>
+                    <h6>Costo de la cantidad actual: ${{ingredient.total_cost}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
