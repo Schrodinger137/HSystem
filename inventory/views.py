@@ -8,7 +8,14 @@ def index(request):
     return render(request, 'principal/index.html')
 
 def inventory(request):
-    return render(request, 'inventory/inventory.html')
+    
+    ingredients = Ingredient.objects.all()
+    
+    context = {
+        'ingredients':ingredients
+    }
+
+    return render(request, 'inventory/inventory.html', context)
 
 def ingredientInventory(request):
     ingredients = Ingredient.objects.all()

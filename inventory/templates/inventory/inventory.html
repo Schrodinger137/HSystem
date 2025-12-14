@@ -5,7 +5,7 @@
 
 {% block breadCrumb %}
 <li class="breadcrumb-item active" aria-current="page">
-        Inventario
+    Inventario
 </li>
 {% endblock %}
 
@@ -41,38 +41,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for ingredient in ingredients %}
                         <tr>
-                            <td>1</td>
-                            <td>Jitomate</td>
-                            <td>2</td>
+                            <td>{{ ingredient.id }}</td>
+                            <td>{{ ingredient.name }}</td>
+                            <td>{{ ingredient.quantity }}</td>
                             <td>
-                                <input class="form-check-input m-0" type="checkbox" checked>
+                                <input class="form-check-input m-0" type="checkbox" {% if ingredient.available %}checked{% endif %}>
                             </td>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Jitomate</td>
-                            <td>2</td>
-                            <td>
-                                <input class="form-check-input m-0" type="checkbox" checked>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Jitomate</td>
-                            <td>2</td>
-                            <td>
-                                <input class="form-check-input m-0" type="checkbox" checked>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Jitomate</td>
-                            <td>2</td>
-                            <td>
-                                <input class="form-check-input m-0" type="checkbox" checked>
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
