@@ -2,13 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-    labels = ["Ene", "Feb", "Mar", "Abr", "May"]
-    ventas = [150, 200, 180, 220, 300]
-    gastos = [120, 160, 130, 150, 210]
+    return render(request, 'principal/index.html')
 
-    context = {
-        "labels": labels,
-        "ventas": ventas,
-        "gastos": gastos,
-    }
-    return render(request, 'principal/index.html', context)
+def inventory(request):
+    return render(request, 'inventory/inventory.html')
