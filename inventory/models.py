@@ -1,6 +1,7 @@
 from django.db import models
 from products.models import *
 from django.db.models import Sum
+from decimal import Decimal
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
@@ -8,6 +9,12 @@ class Ingredient(models.Model):
     cost_per_unit = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     available = models.BooleanField(default=True)
+    
+    def save(self, *args, **kwargs):
+        # Regla de negocio central
+        self.available = self.quantity > Decimal("0")
+        super().save(*args, **kwargs)
+
     
     @property
     def total_cost(self):

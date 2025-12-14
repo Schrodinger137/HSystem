@@ -1,9 +1,9 @@
+from decimal import Decimal
 from django.shortcuts import render
 from .models import *
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-from decimal import Decimal
 from django.shortcuts import get_object_or_404
 
 
@@ -37,7 +37,6 @@ def ingredient_create(request):
         unit = request.POST.get("unit")
         cost_per_unit = Decimal(request.POST.get("cost_per_unit"))
         quantity = Decimal(request.POST.get("quantity", "0"))
-        available = request.POST.get("available") == "on"
 
         if not name or not unit:
             return JsonResponse({
@@ -50,7 +49,6 @@ def ingredient_create(request):
             unit=unit,
             cost_per_unit=cost_per_unit,
             quantity=quantity,
-            available=available
         )
 
         return JsonResponse({
@@ -63,7 +61,6 @@ def ingredient_create(request):
                 "cost_per_unit": str(ingredient.cost_per_unit),
                 "quantity": str(ingredient.quantity),
                 "total_cost": str(ingredient.total_cost),
-                "available": ingredient.available
             }
         })
 
@@ -82,7 +79,6 @@ def ingredient_update(request, ingredient_id):
         unit = request.POST.get("unit")
         cost_per_unit = Decimal(request.POST.get("cost_per_unit"))
         quantity = Decimal(request.POST.get("quantity", "0"))
-        available = request.POST.get("available") == "on"
 
         if not name or not unit:
             return JsonResponse({
@@ -94,7 +90,6 @@ def ingredient_update(request, ingredient_id):
         ingredient.unit = unit
         ingredient.cost_per_unit = cost_per_unit
         ingredient.quantity = quantity
-        ingredient.available = available
         ingredient.save()
 
         return JsonResponse({
@@ -107,7 +102,6 @@ def ingredient_update(request, ingredient_id):
                 "cost_per_unit": str(ingredient.cost_per_unit),
                 "quantity": str(ingredient.quantity),
                 "total_cost": str(ingredient.total_cost),
-                "available": ingredient.available
             }
         })
 
