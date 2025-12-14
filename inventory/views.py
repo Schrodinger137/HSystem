@@ -6,3 +6,6 @@ def index(request):
 
 def inventory(request):
     return render(request, 'inventory/inventory.html')
+
+def ingredientInventory(request):
+    return render(request, 'inventory/ingredientInventory.html')
