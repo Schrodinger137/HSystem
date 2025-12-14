@@ -3,6 +3,8 @@ from .models import *
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from decimal import Decimal
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -70,6 +72,50 @@ def ingredient_create(request):
             "success": False,
             "message": str(e)
         }, status=500)
+        
+@require_POST
+def ingredient_update(request, ingredient_id):
+    try:
+        ingredient = get_object_or_404(Ingredient, id=ingredient_id)
+
+        name = request.POST.get("name")
+        unit = request.POST.get("unit")
+        cost_per_unit = Decimal(request.POST.get("cost_per_unit"))
+        quantity = Decimal(request.POST.get("quantity", "0"))
+        available = request.POST.get("available") == "on"
+
+        if not name or not unit:
+            return JsonResponse({
+                "success": False,
+                "message": "Todos los campos son obligatorios"
+            }, status=400)
+
+        ingredient.name = name
+        ingredient.unit = unit
+        ingredient.cost_per_unit = cost_per_unit
+        ingredient.quantity = quantity
+        ingredient.available = available
+        ingredient.save()
+
+        return JsonResponse({
+            "success": True,
+            "message": "Ingrediente actualizado correctamente",
+            "ingredient": {
+                "id": ingredient.id,
+                "name": ingredient.name,
+                "unit": ingredient.unit,
+                "cost_per_unit": str(ingredient.cost_per_unit),
+                "quantity": str(ingredient.quantity),
+                "total_cost": str(ingredient.total_cost),
+                "available": ingredient.available
+            }
+        })
+
+    except Exception as e:
+        return JsonResponse({
+            "success": False,
+            "message": str(e)
+        }, status=500)        
 
 def recipeInventory(request):
     return render(request, 'inventory/recipeInventory.html')

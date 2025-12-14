@@ -71,7 +71,7 @@
                     <input class="form-check-input m-0" type="checkbox" {% if ingredient.available %}checked{% endif %}>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-outline-warning">
+                    <button type="button" class="btn btn-outline-warning" onclick="openEditIngredientModal({{ ingredient.id }}, '{{ ingredient.name|escapejs }}', '{{ ingredient.unit }}', '{{ ingredient.cost_per_unit }}', '{{ ingredient.quantity }}', {{ ingredient.available|yesno:'true,false' }})">
                         <i class="bi bi-pencil-square"></i>Editar</button>
                 </td>
             </tr>
