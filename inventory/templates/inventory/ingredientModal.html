@@ -1,113 +1,104 @@
 <div class="modal fade" id="ingredientModal" tabindex="-1" aria-labelledby="ingredientModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-dark text-light">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light">
 
-      <div class="modal-header border-secondary">
-        <h1 class="modal-title fs-5" id="ingredientModalLabel">
-          Nuevo ingrediente
-        </h1>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-      </div>
+            <div class="modal-header border-secondary">
+                <h1 class="modal-title fs-5" id="ingredientModalLabel">
+                    Nuevo ingrediente
+                </h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
 
-      <form id="ingredientForm" method="post">
-        {% csrf_token %}
+            <form id="ingredientForm" method="post">
+                {% csrf_token %}
 
-        <div class="modal-body">
+                <div class="modal-body">
 
-          <div class="mb-3">
-            <label class="form-label">Nombre</label>
-            <input
-              type="text"
-              name="name"
-              class="form-control bg-dark text-light border-secondary"
-              placeholder="Ej. Azúcar"
-              required>
-          </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" name="name" class="form-control bg-dark text-light border-secondary"
+                            placeholder="Ej. Azúcar" required>
+                    </div>
 
-          <div class="mb-3">
-            <label class="form-label">Unidad</label>
-            <select
-              name="unit"
-              class="form-select bg-dark text-light border-secondary"
-              required>
-              <option value="">Selecciona una unidad</option>
-              <option value="kg">Kilogramo</option>
-              <option value="g">Gramo</option>
-              <option value="l">Litro</option>
-              <option value="ml">Mililitro</option>
-              <option value="u">Unidad</option>
-            </select>
-          </div>
+                    <div class="mb-3">
+                        <label class="form-label">Unidad</label>
+                        <select name="unit" class="form-select bg-dark text-light border-secondary" required>
+                            <option value="">Selecciona una unidad</option>
+                            <option value="kg">Kilogramo</option>
+                            <option value="g">Gramo</option>
+                            <option value="l">Litro</option>
+                            <option value="ml">Mililitro</option>
+                            <option value="u">Unidad</option>
+                        </select>
+                    </div>
 
-          <div class="mb-3">
-            <label class="form-label">Costo por unidad</label>
-            <input
-              type="number"
-              step="0.01"
-              name="cost_per_unit"
-              class="form-control bg-dark text-light border-secondary"
-              placeholder="0.00"
-              required>
-          </div>
+                    <div class="mb-3">
+                        <label class="form-label">Costo por unidad</label>
+                        <input type="number" step="0.01" name="cost_per_unit"
+                            class="form-control bg-dark text-light border-secondary" placeholder="0.00" required>
+                    </div>
 
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              name="available"
-              id="available"
-              checked>
-            <label class="form-check-label" for="available">
-              Disponible
-            </label>
-          </div>
+                    <div class="mb-3">
+                        <label class="form-label">Cantidad inicial</label>
+                        <input type="number" step="0.01" name="quantity"
+                            class="form-control bg-dark text-light border-secondary" placeholder="0.00" value="0"
+                            required>
+                    </div>
+
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="available" id="available" checked>
+                        <label class="form-check-label" for="available">
+                            Disponible
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Guardar
+                    </button>
+                </div>
+            </form>
 
         </div>
-
-        <div class="modal-footer border-secondary">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-            Cancelar
-          </button>
-          <button type="submit" class="btn btn-primary">
-            Guardar
-          </button>
-        </div>
-      </form>
-
     </div>
-  </div>
 </div>
 
 <script>
-document.getElementById("ingredientForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+    document.getElementById("ingredientForm").addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    const form = this;
-    const formData = new FormData(form);
+        const form = this;
+        const formData = new FormData(form);
 
-    fetch("{% url 'ingredientCreate' %}", {
-        method: "POST",
-        body: formData,
-        headers: {
-            "X-CSRFToken": form.querySelector('[name=csrfmiddlewaretoken]').value
-        }
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) {
-            // opcional: cerrar el modal primero
-            const modal = bootstrap.Modal.getInstance(
-                document.getElementById("ingredientModal")
-            );
-            modal.hide();
+        fetch("{% url 'ingredientCreate' %}", {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-CSRFToken": form.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // opcional: cerrar el modal primero
+                    const modal = bootstrap.Modal.getInstance(
+                        document.getElementById("ingredientModal")
+                    );
+                    modal.hide();
 
-            // 🔥 RECARGA LA PÁGINA
-            location.reload();
-        } else {
-            alert(data.message);
-        }
-    })
-    .catch(err => console.error(err));
-});
+                    // 🔥 RECARGA LA PÁGINA
+                    location.reload();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(err => console.error(err));
+    });
 </script>
