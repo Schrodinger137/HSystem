@@ -55,35 +55,50 @@
       background-color: #2c2f33 !important;
     }
 
-            /* Cards de gráficas */
-        .chart-card {
-            background-color: #25272d;
-            height: 320px;
-        }
+    /* Cards de gráficas */
+    .chart-card {
+      background-color: #25272d;
+      height: 320px;
+    }
 
-        .chart-card .card-body {
-            display: flex;
-            flex-direction: column;
-        }
+    .chart-card .card-body {
+      display: flex;
+      flex-direction: column;
+    }
 
-        .chart-card canvas {
-            max-height: 170px !important;
-        }
+    .chart-card canvas {
+      max-height: 170px !important;
+    }
 
-        .chart-card h5 {
-            font-size: .95rem;
-            color: #cfd8ff;
-            margin-bottom: 10px;
-        }
+    .chart-card h5 {
+      font-size: .95rem;
+      color: #cfd8ff;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 
 <body>
-
-  {% include 'inc/header.html' %}
   {% include 'inc/sidebar.html' %}
+  <nav class="navbar navbar-expand-lg navbar-dark-soft border-dark sticky-top shadow-sm" id="mainNavbar">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light" href="{% url 'index' %}">HSJ</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% block headerOptions %}
+
+          {% endblock %}
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <div class="main-content">
+
     {% block content %}{% endblock %}
   </div>
 

@@ -3,6 +3,12 @@
 
 {% block title %}Inicio{% endblock %}
 
+{% block headerOptions %}
+<li class="nav-item">
+    <a class="nav-link active text-light" href="{% url 'index' %}">Inicio</a>
+</li>
+{% endblock %}
+
 {% block content %}
 
 <!-- TARJETAS SUPERIORES -->
@@ -10,23 +16,23 @@
     <div class="row g-4">
         <div class="col-md-3">
             <a href="{% url 'products' %}" style="text-decoration: none;">
-            <div class="card bg-primary text-white h-100">
-                <div class="card-body">
-                    <h5>Sistema de Ventas</h5>
-                    <p class="mb-0">Accede al módulo de ventas.</p>
+                <div class="card bg-primary text-white h-100">
+                    <div class="card-body">
+                        <h5>Sistema de Ventas</h5>
+                        <p class="mb-0">Accede al módulo de ventas.</p>
+                    </div>
                 </div>
-            </div>
             </a>
         </div>
 
         <div class="col-md-3">
             <a href="{% url 'inventory' %}" style="text-decoration: none;">
-            <div class="card bg-success text-white h-100">
-                <div class="card-body">
-                    <h5>Inventario</h5>
-                    <p class="mb-0">Gestiona el stock en tiempo real.</p>
+                <div class="card bg-success text-white h-100">
+                    <div class="card-body">
+                        <h5>Inventario</h5>
+                        <p class="mb-0">Gestiona el stock en tiempo real.</p>
+                    </div>
                 </div>
-            </div>
             </a>
         </div>
 
@@ -43,12 +49,12 @@
 
         <div class="col-md-3">
             <a href="{% url 'products' %}" style="text-decoration: none;">
-            <div class="card bg-danger text-white h-100">
-                <div class="card-body">
-                    <h5>Finanzas</h5>
-                    <p class="mb-0">Visualiza informes.</p>
+                <div class="card bg-danger text-white h-100">
+                    <div class="card-body">
+                        <h5>Finanzas</h5>
+                        <p class="mb-0">Visualiza informes.</p>
+                    </div>
                 </div>
-            </div>
             </a>
         </div>
     </div>
