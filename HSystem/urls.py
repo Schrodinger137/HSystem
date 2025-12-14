@@ -18,10 +18,14 @@ from django.contrib import admin
 from django.urls import path
 from inventory import views as inv_views
 from products import views as prod_views
+from sales import views as sales_views
+from finance import views as fin_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', inv_views.index, name='index'),
     path('inventory', inv_views.inventory, name='inventory'),
-    path('products/', prod_views.products, name='products')
+    path('products/', prod_views.products, name='products'),
+    path('sales/', sales_views.sales, name='sales'),
+    path('finance/', fin_views.finance, name='finance'),
 ]
