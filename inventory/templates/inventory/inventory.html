@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Inventario{% endblock %}
+
+{% block headerOptions %}
+<li class="nav-item">
+    <a class="nav-link active text-primary" href="{% url 'inventory' %}">Inventario </a>
+</li>
+{% endblock %}
 
 {% block content %}
 

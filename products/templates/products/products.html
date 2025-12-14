@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Productos{% endblock %}
+
+{% block headerOptions %}
+<li class="nav-item">
+    <a class="nav-link active text-primary" href="{% url 'products' %}">Productos </a>
+</li>
+{% endblock %}
 
 {% block content %}
 
