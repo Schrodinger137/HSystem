@@ -33,7 +33,10 @@ urlpatterns = [
     path('inventory/ingredient/<int:ingredient_id>/', inv_views.ingredient, name='ingredient'),
     
     path('recipeInventory', inv_views.recipeInventory, name='recipeInventory'),
+    
     path('products/', prod_views.products, name='products'),
+    path('products/create/', prod_views.product_create, name='productCreate'), 
+    
     path('sales/', sales_views.sales, name='sales'),
     path('finance/', fin_views.finance, name='finance'),
 ]

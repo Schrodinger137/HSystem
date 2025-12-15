@@ -1,0 +1,88 @@
+<!-- Modal para crear un nuevo producto -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light">
+
+            <div class="modal-header border-secondary">
+                <h1 class="modal-title fs-5" id="productModalLabel">
+                    Nuevo producto
+                </h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+
+            <form id="productForm" method="post">
+                {% csrf_token %}
+
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" name="name" class="form-control bg-dark text-light border-secondary"
+                            placeholder="Ej. Galleta" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Descripción</label>
+                        <textarea name="description" class="form-control bg-dark text-light border-secondary"
+                            placeholder="Descripción del producto" rows="3" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Precio</label>
+                        <input type="number" step="1" name="price"
+                            class="form-control bg-dark text-light border-secondary" placeholder="0" required>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="available" class="form-check-input" id="availableCheck" checked>
+                        <label class="form-check-label" for="availableCheck">Disponible</label>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("productForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const form = this;
+        const formData = new FormData(form);
+
+        // Asegúrate de que tu URL en urls.py esté nombrada 'productCreate'
+        fetch("{% url 'productCreate' %}", {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-CSRFToken": form.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const modal = bootstrap.Modal.getInstance(
+                        document.getElementById("productModal")
+                    );
+                    modal.hide();
+
+                    location.reload(); // recarga para actualizar la lista
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(err => console.error(err));
+    });
+</script>
