@@ -3,6 +3,7 @@ from .models import *
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
 from decimal import Decimal
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 def products(request):
@@ -41,6 +42,35 @@ def product_create(request):
         )
 
         return JsonResponse({'success': True, 'message': 'Producto creado correctamente.'})
+
+    except Exception as e:
+        return JsonResponse({'success': False, 'message': f'Ocurrió un error: {str(e)}'})
+
+@require_POST
+def product_update(request, product_id):
+    try:
+        product = get_object_or_404(Product, id=product_id)
+
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+        available = request.POST.get('available') == 'on'
+
+        if not name or not description or not price:
+            return JsonResponse({'success': False, 'message': 'Todos los campos son obligatorios.'})
+
+        try:
+            price = int(price)
+        except ValueError:
+            return JsonResponse({'success': False, 'message': 'El precio debe ser un número válido.'})
+
+        product.name = name
+        product.description = description
+        product.price = price
+        product.available = available
+        product.save()
+
+        return JsonResponse({'success': True, 'message': 'Producto actualizado correctamente.'})
 
     except Exception as e:
         return JsonResponse({'success': False, 'message': f'Ocurrió un error: {str(e)}'})

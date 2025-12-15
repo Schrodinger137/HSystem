@@ -35,7 +35,8 @@ urlpatterns = [
     path('recipeInventory', inv_views.recipeInventory, name='recipeInventory'),
     
     path('products/', prod_views.products, name='products'),
-    path('products/create/', prod_views.product_create, name='productCreate'), 
+    path('products/create/', prod_views.product_create, name='productCreate'),
+    path('products/update/<int:product_id>/', prod_views.product_update, name='productUpdate'),
     
     path('sales/', sales_views.sales, name='sales'),
     path('finance/', fin_views.finance, name='finance'),

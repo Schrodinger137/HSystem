@@ -12,6 +12,7 @@
 {% block content %}
 
 {% include 'products/modals/createProductModal.html' %}
+{% include 'products/modals/updateProductModal.html' %}
 
 <div class="row align-items-center mb-3 g-2">
     <div class="col-md-8 col-lg-9">
@@ -54,8 +55,9 @@
                         <input class="form-check-input m-0" type="checkbox" {% if product.available %}checked{% endif %}>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-outline-warning">
-                        <i class="bi bi-pencil-square"></i>Editar</button>
+                    <button type="button" class="btn btn-outline-warning" onclick='openUpdateModal({ id: {{ product.id }}, name: "{{ product.name|escapejs }}", description: "{{ product.description|escapejs }}", price: {{ product.price }}, available: {{ product.available|yesno:"true,false" }}})'>
+                        <i class="bi bi-pencil-square"></i>Editar
+                    </button>
                 </td>
             </tr>
             {% endfor %}

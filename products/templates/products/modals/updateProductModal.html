@@ -1,0 +1,98 @@
+<!-- Modal para actualizar producto -->
+<div class="modal fade" id="productUpdateModal" tabindex="-1" aria-labelledby="productUpdateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light">
+
+            <div class="modal-header border-secondary">
+                <h1 class="modal-title fs-5" id="productUpdateModalLabel">
+                    Editar producto
+                </h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+
+            <form id="productUpdateForm" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" id="updateProductId">
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" name="name" id="updateName"
+                            class="form-control bg-dark text-light border-secondary" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Descripción</label>
+                        <textarea name="description" id="updateDescription"
+                            class="form-control bg-dark text-light border-secondary" rows="3" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Precio</label>
+                        <input type="number" step="1" name="price" id="updatePrice"
+                            class="form-control bg-dark text-light border-secondary" required>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="available" class="form-check-input" id="updateAvailable">
+                        <label class="form-check-label" for="updateAvailable">Disponible</label>
+                    </div>
+                </div>
+
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Guardar cambios
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // Abrir modal con los datos del producto
+    function openUpdateModal(product) {
+        document.getElementById('updateProductId').value = product.id;
+        document.getElementById('updateName').value = product.name;
+        document.getElementById('updateDescription').value = product.description;
+        document.getElementById('updatePrice').value = product.price;
+        document.getElementById('updateAvailable').checked = product.available;
+
+        const modal = new bootstrap.Modal(document.getElementById('productUpdateModal'));
+        modal.show();
+    }
+
+    // Enviar formulario de actualización
+    document.getElementById("productUpdateForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const form = this;
+        const productId = document.getElementById('updateProductId').value;
+        const formData = new FormData(form);
+
+        fetch(`/products/update/${productId}/`, {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-CSRFToken": form.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                const modal = bootstrap.Modal.getInstance(
+                    document.getElementById("productUpdateModal")
+                );
+                modal.hide();
+                location.reload(); // O actualizar fila de tabla manualmente
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(err => console.error(err));
+    });
+</script>
