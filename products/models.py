@@ -4,7 +4,7 @@ from django.db import models
 class Product(models.Model):
     name = models.CharField()
     description = models.TextField()
-    precio = models.IntegerField()
+    price = models.IntegerField()
     available = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
